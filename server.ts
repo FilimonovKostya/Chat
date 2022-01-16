@@ -1,17 +1,28 @@
-const express = require('express')
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const socket = require('socket.io');
 
-const app = express()
+const port = 8888;
 
-const rooms = new Map()
+app.use(cors());
 
+const chanels = new Map([
+    ['rooms', []],
+    ['messages', []],
+]);
 
-app.get('/rooms', (req, res) => {
+app.get('/', (req, res) => {
+    res.json([...chanels.values()])
 })
 
-app.listen(9999, (error:string) => {
-    if (error) {
-        throw Error(error)
-    }
+const server = app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})
 
-    console.log('Server is running')
+const io = socket.listen(server);
+
+io.on('connection', (socket) => {
+    console.log(socket)
+    socket.send('Hello!');
 })
