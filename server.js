@@ -16,7 +16,6 @@ const rooms = new Map([])
 
 app.get('/rooms', (req, res) => {
     console.log('Request on rooms')
-    res.json(rooms)
 })
 
 app.post('/rooms', (req, res) => {
