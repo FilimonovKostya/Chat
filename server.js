@@ -10,7 +10,10 @@ const io = new Server(server, {
     }
 })
 
-const rooms = new Map()
+const rooms = {
+    name:'Kostya',
+    age:25
+}
 
 app.get('/rooms', (req, res) => {
     console.log('Request on rooms')
