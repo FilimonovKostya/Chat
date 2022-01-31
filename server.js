@@ -10,14 +10,27 @@ const io = new Server(server, {
     }
 })
 
-const rooms = {
-    name:'Kostya',
-    age:25
-}
+app.use(express.json())
+
+const rooms = new Map([])
 
 app.get('/rooms', (req, res) => {
     console.log('Request on rooms')
     res.json(rooms)
+})
+
+app.post('/rooms', (req, res) => {
+    const {roomId, userName} = req.body
+
+    if (!rooms.has(roomId)) {
+        rooms.set(roomId,
+            new Map([
+                ['users', new Map()],
+                ['messages', []],
+            ]))
+    }
+
+    res.send()
 })
 
 io.on('connection', socket => {
@@ -25,7 +38,7 @@ io.on('connection', socket => {
 })
 
 server.listen('8080', (err) => {
-    if(err){
+    if (err) {
         throw Error(err)
     }
     console.log('Server is runing');

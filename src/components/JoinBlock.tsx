@@ -1,18 +1,29 @@
-import React, {useEffect} from 'react';
-import {io} from "socket.io-client";
+import React, {useState} from 'react';
+import axios from "axios";
+import userSocket from '../../socket';
 
 const JoinBlock = () => {
 
-    useEffect(() => {
+    const [roomId, setRoomId] = useState('');
+    const [userName, setUserName] = useState('');
 
-       const socket = io()
-    }, [])
+
+    const onEnter = () => {
+        if(!roomId || !userName){
+            return  alert('Incorrect data')
+        }
+        console.log(roomId, userName)
+            axios.post('/rooms', {
+                roomId,
+                userName
+            })
+    }
 
     return (
         <div className="join-block">
-            <input type="text" placeholder="Room ID"/>
-            <input type="text" placeholder="Ваше имя"/>
-            <button className="btn btn-success">ВОЙТИ</button>
+            <input type="text" placeholder="Room ID" value={roomId} onChange={(e => setRoomId(e.target.value))}/>
+            <input type="text" placeholder="Ваше имя" value={userName} onChange={(e => setUserName(e.target.value))}/>
+            <button className="btn btn-success" onClick={onEnter}>ВОЙТИ</button>
         </div>
     );
 }
