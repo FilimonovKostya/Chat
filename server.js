@@ -1,28 +1,21 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
-const socket = require('socket.io');
 
 const port = 8888;
 
-app.use(cors());
-
 const chanels = new Map([
-    ['rooms', []],
-    ['messages', []],
-]);
+ 
+])
 
-app.get('/', (req, res) => {
-    res.json([...chanels.values()])
+app.get('/rooms', (req, res) => {
+    console.log('Request on rooms')
+    res.json(chanels)
 })
 
-const server = app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+app.listen(port, (err) => {
+    if(err){
+        throw Error(err)
+    }
+    console.log('Server is runing');
 })
 
-const io = socket.listen(server);
-
-io.on('connection', (socket) => {
-    console.log(socket)
-    socket.send('Hello!');
-})
