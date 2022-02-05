@@ -16,6 +16,7 @@ const rooms = new Map([])
 
 app.get('/rooms', (req, res) => {
     console.log('Request on rooms')
+    res.send('Hi')
 })
 
 app.post('/rooms', (req, res) => {
@@ -33,6 +34,10 @@ app.post('/rooms', (req, res) => {
 })
 
 io.on('connection', socket => {
+    socket.on('ROOM:JOIN', data => {
+        console.log('data',data)
+    })
+
     console.log('socket connected')
 })
 
@@ -40,6 +45,7 @@ server.listen('8080', (err) => {
     if (err) {
         throw Error(err)
     }
+
     console.log('Server is runing');
 })
 

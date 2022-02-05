@@ -1,8 +1,7 @@
 import React, {FC, useState} from 'react';
 import axios from "axios";
-import socket from './../../socket'
 
-const JoinBlock: FC<{ onLogin: () => void }> = ({onLogin}) => {
+const JoinBlock: FC<{ onLogin: (object: Object) => void }> = ({onLogin}) => {
 
     const [roomId, setRoomId] = useState('');
     const [userName, setUserName] = useState('');
@@ -14,13 +13,19 @@ const JoinBlock: FC<{ onLogin: () => void }> = ({onLogin}) => {
             return alert('Incorrect data')
         }
         console.log(roomId, userName)
+
+        const obj = {
+            roomId,
+            userName
+        }
+
         setIsLoading(true)
         await axios.post('/rooms', {
             roomId,
             userName
         })
 
-        onLogin()
+        onLogin(obj)
     }
 
     return (
