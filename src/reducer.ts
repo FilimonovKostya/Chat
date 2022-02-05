@@ -1,9 +1,9 @@
 export default (state: any, action: any) => {
     switch (action.type) {
-        case 'IS_AUTH':
+        case 'JOINED':
             return {
                 ...state,
-                isAuth: action.payload
+                joined: action.payload
             }
 
         default:
