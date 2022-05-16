@@ -1,14 +1,16 @@
 import React from 'react';
+import Button from "../Button";
+import Heading from "../Heading";
 import styles from './styles.module.scss'
-import {ReactComponent as Logo} from "./../../assets/icons/logo.svg";
 
 const SignIn = () => {
     return (
-        <div className={styles.test}>
-           <Logo/>
-           <h1>TalkBox</h1>
+        <div className={styles.wrapper}>
+            <Heading/>
+            <Button/>
         </div>
-    );
+    )
+        ;
 };
 
 export default SignIn;

@@ -4,8 +4,10 @@ import './index.scss'
 
 function App() {
     return (
-        <div className={'container'}>
-            <SignIn/>
+        <div className={'wrapper'}>
+            <div className={'container'}>
+                <SignIn/>
+            </div>
         </div>
     );
 }

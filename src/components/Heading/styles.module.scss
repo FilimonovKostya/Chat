@@ -1,0 +1,22 @@
+@import "./src/variables";
+@import "../../assets/fonts/Righteous-Regular.ttf";
+
+@font-face {
+  font-family: "Righteous";
+  src: local("Righteous-Regular"), url("../../assets/fonts/Righteous-Regular.ttf") format("truetype")
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 94px;
+
+  h1 {
+    font-family: 'Righteous', cursive;
+    font-size: 36px;
+    margin-left: 15px;
+    text-transform: uppercase;
+  }
+
+}
