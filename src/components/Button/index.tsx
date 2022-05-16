@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import styles from './styles.module.scss'
-import {ReactComponent as Google} from "./../../assets/icons/google.svg";
 
-const Button = () => {
+type ButtonProps = {
+    icon: ReactElement<SVGSVGElement>
+    text: string
+}
+
+const Button = ({icon, text}: ButtonProps) => {
     return (
         <div className={styles.container}>
-            <Google/>
-            <span>Sign in with Google</span>
+            {icon}
+            <span>{text}</span>
         </div>
     );
 };
