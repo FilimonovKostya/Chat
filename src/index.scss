@@ -1,0 +1,16 @@
+@import "./variables.scss";
+@import "./assets/fonts/Roboto-Regular.ttf";
+
+@font-face {
+  font-family: "Roboto";
+  src: local("GoldmanBold"), url("./assets/fonts/Roboto-Regular.ttf") format("truetype")
+}
+
+.container {
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
