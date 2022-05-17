@@ -10,11 +10,16 @@ const SignIn = () => {
     return (
         <div className={styles.wrapper}>
             <Heading/>
-            <Button icon={<Google/>} text={'Sign in with Google'} />
+            <Button icon={<Google/>} text={'Sign in with Google'}/>
             <Button icon={<Facebook/>} text={'Sign in with Facebook'}/>
+            <div className={styles.lineWrapper}>
+                <div className={styles.line}/>
+                <p>Or</p>
+                <div className={styles.line}/>
+            </div>
         </div>
     )
-        ;
+
 };
 
 export default SignIn;
