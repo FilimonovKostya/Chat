@@ -20,8 +20,8 @@ const LogIn = () => {
       />
 
       <Grid item xs>
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 5 }}>
-          <Avatar sx={{ bgcolor: purple['500'], mb: 1 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Avatar sx={{ bgcolor: purple['500'] }}>
             <LoginIcon />
           </Avatar>
 
@@ -54,7 +54,7 @@ const LogIn = () => {
               fullWidth
             />
 
-            <Button type={'submit'} sx={{mt:2}} fullWidth variant='outlined' color='secondary'>
+            <Button type={'submit'} sx={{mt:2}}  variant='outlined' color='secondary'>
               Log in
             </Button>
           </Box>
