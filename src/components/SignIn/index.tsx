@@ -17,14 +17,15 @@ const SignIn = () => {
   return (
     <Container maxWidth={'xs'} sx={{ mt: 15 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Avatar sx={{ background: '#9c27b0' }}>
+        <Avatar sx={{ background: '#9c27b0', mb:1 }}>
           <LockOutlinedIcon />
         </Avatar>
 
+        <Typography textAlign={'center'} component={'h1'} variant={'h5'}>
+          Sign in
+        </Typography>
+
         <Box component={'form'}>
-          <Typography textAlign={'center'} component={'h1'} variant={'h5'}>
-            Sign in
-          </Typography>
           <TextField
             margin={'normal'}
             color={'secondary'}
