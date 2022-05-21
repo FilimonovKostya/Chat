@@ -7,7 +7,7 @@ const port = 3001
 
 // Turn off all CORS problems with Request on server
 app.use(cors())
-// якобы чтобы прочитать request от клиента
+//  чтобы прочитать request от клиента
 app.use(bodyParser())
 
 app.get('/', (req, res) => {
@@ -17,9 +17,8 @@ app.get('/', (req, res) => {
 // Url for registration user
 app.post('/registration', (req, res) => {
   console.log('Request 😈 ---->', req.body)
-  // console.log('RESPONSE ------->', res)
 
-  res.send('Отправляю ответ , мб прошел POST request')
+  res.send('Request OK')
 })
 
 app.listen(port, () => {
