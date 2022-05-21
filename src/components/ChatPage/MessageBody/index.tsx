@@ -5,7 +5,14 @@ import { dialogItems } from '../../../mockData'
 
 const MessageBody = () => {
   return (
-    <Box display={'flex'} flexDirection={'column'} alignItems={'flex-end'} p={2}>
+    <Box
+      display={'flex'}
+      sx={{ overflowX: 'hidden' }}
+      flexDirection={'column'}
+      height={500}
+      alignItems={'flex-end'}
+      p={2}
+    >
       {dialogItems.map((dialog) => (
         <DialogItem key={dialog.id} message={dialog.message} time={dialog.time} />
       ))}

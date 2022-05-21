@@ -10,4 +10,45 @@ export const dialogItems = [
     message: 'Hello , how are you ?',
     time: '06.05.2022 - 17:44',
   },
+  {
+    id: 2,
+    message: 'Hello , how are you ?',
+    time: '06.05.2022 - 17:44',
+  },
+  {
+    id: 2,
+    message: 'Hello , how are you ?',
+    time: '06.05.2022 - 17:44',
+  },
+  {
+    id: 2,
+    message: 'Hello , how are you ?',
+    time: '06.05.2022 - 17:44',
+  },
+  {
+    id: 2,
+    message: 'Hello , how are you ?',
+    time: '06.05.2022 - 17:44',
+  },
+  {
+    id: 2,
+    message: 'Hello , how are you ?',
+    time: '06.05.2022 - 17:44',
+  },
+  {
+    id: 2,
+    message: 'Hello , how are you ?',
+    time: '06.05.2022 - 17:44',
+  },
+  {
+    id: 2,
+    message: 'Hello , how are you ?',
+    time: '06.05.2022 - 17:44',
+  },
+  {
+    id: 2,
+    message: 'Hello , how are you ?',
+    time: '06.05.2022 - 17:44',
+  },
+
 ]
