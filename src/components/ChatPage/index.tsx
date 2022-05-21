@@ -13,7 +13,11 @@ const ChatPage = () => {
         <Grid container borderTop={1} borderColor={blue[100]}>
           <Grid item xs>
             <TextField
-              sx={{ borderStyle: 'none' }}
+              sx={{
+                fieldset: {
+                  borderStyle: 'none',
+                },
+              }}
               fullWidth
               name={'message'}
               id={'message'}
@@ -23,6 +27,7 @@ const ChatPage = () => {
 
           <Grid item>
             <Box
+              component={'button'}
               sx={{
                 outline: 'none',
                 border: 'none',
@@ -30,7 +35,6 @@ const ChatPage = () => {
                 borderStyle: 'none',
                 borderBottomRightRadius: 4,
               }}
-              component={'button'}
               p={2}
               bgcolor={'#f50057'}
               color={'white'}
