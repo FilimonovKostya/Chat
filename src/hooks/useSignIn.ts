@@ -13,7 +13,7 @@ export const useSignIn = () => {
   }
 
   const  fetchInputData = async () => {
-    const response = await axios.post(`http://localhost:3001/registration`, inputData)
+    const response = await axios.post(`http://localhost:3001/registration`,  {data: 'Privet'})
 
     console.log('Response in custom hook ---> ', response)
   }
