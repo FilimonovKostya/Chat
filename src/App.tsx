@@ -6,9 +6,9 @@ import ChatPage from './components/ChatPage'
 function App() {
   return (
     <>
-      {/*<SignIn/>*/}
+      <SignIn/>
       {/*<LogIn />*/}
-      <ChatPage/>
+      {/*<ChatPage/>*/}
     </>
   )
 }
