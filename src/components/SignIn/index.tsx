@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Avatar,
   Box,
   Button,
   Checkbox,
@@ -9,24 +8,28 @@ import {
   Grid,
   Link,
   TextField,
-  Typography,
 } from '@mui/material'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import Header from './Header'
+import Footer from './Footer'
+import { useSignIn } from '../../hooks/useSignIn'
 
 const SignIn = () => {
+  const {
+    inputData: { email, password },
+    onInputHandler,
+    fetchInputData
+  } = useSignIn()
+
   return (
     <Container maxWidth={'xs'} sx={{ mt: 15 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Avatar sx={{ background: '#9c27b0', mb:1 }}>
-          <LockOutlinedIcon />
-        </Avatar>
-
-        <Typography textAlign={'center'} component={'h1'} variant={'h5'}>
-          Sign in
-        </Typography>
+        <Header />
 
         <Box component={'form'}>
           <TextField
+            value={email}
+            onChange={onInputHandler}
+            name={'email'}
             margin={'normal'}
             color={'secondary'}
             label='Email Address'
@@ -36,12 +39,15 @@ const SignIn = () => {
           />
 
           <TextField
+            value={password}
+            onChange={onInputHandler}
+            name={'password'}
             margin={'normal'}
             color={'secondary'}
             label='Password'
             fullWidth
             variant='outlined'
-            type={'password'}
+            // type={'password'}
             required
           />
 
@@ -50,7 +56,7 @@ const SignIn = () => {
             label={'Remember me'}
           />
 
-          <Button variant='contained' type={'submit'} sx={{ mt: 1 }} fullWidth>
+          <Button variant='contained' onClick={fetchInputData} sx={{ mt: 1 }} fullWidth>
             Sign in
           </Button>
 
@@ -68,9 +74,7 @@ const SignIn = () => {
             </Grid>
           </Grid>
 
-          <Box textAlign={'center'} color={'text.secondary'}>
-            <Typography variant={'body2'}> Copyright information :)</Typography>
-          </Box>
+          <Footer />
         </Box>
       </Box>
     </Container>
