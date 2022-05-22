@@ -12,13 +12,24 @@ import {
 import Header from './Header'
 import Footer from './Footer'
 import { useSignIn } from '../../hooks/useSignIn'
+import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
   const {
     inputData: { email, password },
     onInputHandler,
-    fetchInputData
+    fetchInputData,
+    fetchingStatus,
   } = useSignIn('registration')
+
+  const navigate = useNavigate()
+
+  console.log('fetchingStatus', fetchingStatus)
+
+  if (fetchingStatus?.status === 'OK') {
+    console.log('inside')
+    navigate('/login')
+  }
 
   return (
     <Container maxWidth={'xs'} sx={{ mt: 15 }}>

@@ -2,8 +2,15 @@ import { ChangeEvent, useState } from 'react'
 import axios from 'axios'
 import { URL } from '../constants'
 
+type ResponseSignInType = {
+  message: string
+  newUser: { email: string; password: string }
+  status: string
+}
+
 export const useSignIn = (urlParam: string) => {
   const [inputData, setInputData] = useState({ email: '', password: '' })
+  const [fetchingStatus, setFetchingStatus] = useState<ResponseSignInType>()
 
   const onInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setInputData((prevState) => ({
@@ -13,13 +20,20 @@ export const useSignIn = (urlParam: string) => {
   }
 
   const fetchInputData = async () => {
-    const response = await axios.post(`${URL}/${urlParam}`, {
-      email: inputData.email.replaceAll(' ', ''),
-      password: inputData.password.trim(),
-    })
+    try {
+      const response = await axios.post<ResponseSignInType>(`${URL}/${urlParam}`, {
+        email: inputData.email.replaceAll(' ', ''),
+        password: inputData.password.trim(),
+      })
 
-    console.log('Response in custom hook ---> ', response.data)
+      setFetchingStatus(response.data)
+      console.log('Response in custom hook ---> ', response)
+    } catch (e) {
+      console.log('Some error in custom hook', { e })
+    }
   }
 
-  return { inputData, onInputHandler, fetchInputData }
+  console.log('fetchingStatus', fetchingStatus)
+
+  return { inputData, onInputHandler, fetchInputData, fetchingStatus }
 }

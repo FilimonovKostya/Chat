@@ -4,9 +4,17 @@ import reactImg from './../../assets/react.webp'
 import LoginIcon from '@mui/icons-material/Login'
 import { purple } from '@mui/material/colors'
 import { useSignIn } from '../../hooks/useSignIn'
+import { useNavigate } from 'react-router-dom'
 
 const LogIn = () => {
-  const { inputData, fetchInputData, onInputHandler } = useSignIn('login')
+  const { inputData, fetchInputData, onInputHandler, fetchingStatus } = useSignIn('login')
+  const navigate = useNavigate()
+
+  console.log('fetchingStatus LOGIN', fetchingStatus)
+
+  if (fetchingStatus?.status === 'OK'){
+    navigate('/chat')
+  }
 
   return (
     <Grid container component='main' alignItems={'center'}>

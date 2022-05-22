@@ -1,7 +1,6 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const { v1 } = require('uuid')
 
 const app = express()
 const port = 3001
@@ -10,8 +9,6 @@ const port = 3001
 app.use(cors())
 //  чтобы прочитать request от клиента
 app.use(bodyParser())
-
-// Logic
 
 const users = {}
 
@@ -27,7 +24,7 @@ const checkUser = (user) => {
     password: user.password,
   })
 
-  return { message: 'User was created', newUser }
+  return { message: 'User was created', newUser, status: 'OK' }
 }
 
 const logInUser = (user) => {
@@ -38,9 +35,9 @@ const logInUser = (user) => {
   return { error: 'Not information about this user' }
 }
 
-app.get('/', (req, res) => {
-  res.send('Hello my dear Friend')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hello my dear Friend')
+// })
 
 // Url for registration user
 app.post('/registration', (req, res) => {
@@ -50,7 +47,7 @@ app.post('/registration', (req, res) => {
 
   const result = checkUser(req.body)
 
-  res.send({ result })
+  res.send(result)
 })
 
 // Url for logIn user
@@ -59,7 +56,7 @@ app.post('/login', (req, res) => {
 
   const result = logInUser(req.body)
 
-  res.send({ result })
+  res.send(result)
 })
 
 app.listen(port, () => {
