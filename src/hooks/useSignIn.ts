@@ -13,9 +13,12 @@ export const useSignIn = () => {
   }
 
   const fetchInputData = async () => {
-    const response = await axios.post(`${URL}/registration`, { data: inputData })
+    const response = await axios.post(`${URL}/registration`, {
+      email: inputData.email.replaceAll(' ', ''),
+      password: inputData.password.trim(),
+    })
 
-    console.log('Response in custom hook ---> ', response)
+    console.log('Response in custom hook ---> ', response.data)
   }
 
   return { inputData, onInputHandler, fetchInputData }
