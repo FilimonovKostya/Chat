@@ -3,8 +3,11 @@ import { Avatar, Box, Button, Grid, TextField, Typography } from '@mui/material'
 import reactImg from './../../assets/react.webp'
 import LoginIcon from '@mui/icons-material/Login'
 import { purple } from '@mui/material/colors'
+import { useSignIn } from '../../hooks/useSignIn'
 
 const LogIn = () => {
+  const { inputData, fetchInputData, onInputHandler } = useSignIn('login')
+
   return (
     <Grid container component='main' alignItems={'center'}>
       <Grid
@@ -31,6 +34,8 @@ const LogIn = () => {
 
           <Box component={'form'}>
             <TextField
+              value={inputData.email}
+              onChange={onInputHandler}
               color='secondary'
               margin='normal'
               id='email'
@@ -43,6 +48,8 @@ const LogIn = () => {
             />
 
             <TextField
+              value={inputData.password}
+              onChange={onInputHandler}
               color='secondary'
               margin='normal'
               id='password'
@@ -54,7 +61,7 @@ const LogIn = () => {
               fullWidth
             />
 
-            <Button type={'submit'} sx={{mt:2}}  variant='outlined' color='secondary'>
+            <Button onClick={fetchInputData} sx={{ mt: 2 }} variant='outlined' color='secondary'>
               Log in
             </Button>
           </Box>

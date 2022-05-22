@@ -22,12 +22,20 @@ const checkUser = (user) => {
     }
   }
 
-  users[user.email] = {
+  const newUser = (users[user.email] = {
     email: user.email,
     password: user.password,
+  })
+
+  return { message: 'User was created', newUser }
+}
+
+const logInUser = (user) => {
+  if (users.hasOwnProperty(user.email)) {
+    return { status: 'OK' }
   }
 
-  return users
+  return { error: 'Not information about this user' }
 }
 
 app.get('/', (req, res) => {
@@ -36,9 +44,20 @@ app.get('/', (req, res) => {
 
 // Url for registration user
 app.post('/registration', (req, res) => {
-  console.log('Request 😈 ---->', req.body)
+  console.log('Request registration page 😈 ---->', req.body)
+
+  console.log('ALL USERS', users)
 
   const result = checkUser(req.body)
+
+  res.send({ result })
+})
+
+// Url for logIn user
+app.post('/login', (req, res) => {
+  console.log('Request login page 😈 ---->', req.body)
+
+  const result = logInUser(req.body)
 
   res.send({ result })
 })

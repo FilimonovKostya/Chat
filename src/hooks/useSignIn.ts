@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react'
 import axios from 'axios'
 import { URL } from '../constants'
 
-export const useSignIn = () => {
+export const useSignIn = (urlParam: string) => {
   const [inputData, setInputData] = useState({ email: '', password: '' })
 
   const onInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -13,7 +13,7 @@ export const useSignIn = () => {
   }
 
   const fetchInputData = async () => {
-    const response = await axios.post(`${URL}/registration`, {
+    const response = await axios.post(`${URL}/${urlParam}`, {
       email: inputData.email.replaceAll(' ', ''),
       password: inputData.password.trim(),
     })

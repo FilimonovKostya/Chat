@@ -18,7 +18,7 @@ const SignIn = () => {
     inputData: { email, password },
     onInputHandler,
     fetchInputData
-  } = useSignIn()
+  } = useSignIn('registration')
 
   return (
     <Container maxWidth={'xs'} sx={{ mt: 15 }}>
