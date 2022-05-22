@@ -35,27 +35,15 @@ const logInUser = (user) => {
   return { error: 'Not information about this user' }
 }
 
-// app.get('/', (req, res) => {
-//   res.send('Hello my dear Friend')
-// })
-
 // Url for registration user
 app.post('/registration', (req, res) => {
-  console.log('Request registration page 😈 ---->', req.body)
-
-  console.log('ALL USERS', users)
-
   const result = checkUser(req.body)
-
   res.send(result)
 })
 
 // Url for logIn user
 app.post('/login', (req, res) => {
-  console.log('Request login page 😈 ---->', req.body)
-
   const result = logInUser(req.body)
-
   res.send(result)
 })
 

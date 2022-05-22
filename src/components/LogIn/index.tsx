@@ -7,12 +7,16 @@ import { useSignIn } from '../../hooks/useSignIn'
 import { useNavigate } from 'react-router-dom'
 
 const LogIn = () => {
-  const { inputData, fetchInputData, onInputHandler, fetchingStatus } = useSignIn('login')
+  const {
+    inputData: { email, password },
+    fetchInputData,
+    onInputHandler,
+    fetchingStatus,
+  } = useSignIn('login')
+
   const navigate = useNavigate()
 
-  console.log('fetchingStatus LOGIN', fetchingStatus)
-
-  if (fetchingStatus?.status === 'OK'){
+  if (fetchingStatus?.status === 'OK') {
     navigate('/chat')
   }
 
@@ -42,7 +46,7 @@ const LogIn = () => {
 
           <Box component={'form'}>
             <TextField
-              value={inputData.email}
+              value={email}
               onChange={onInputHandler}
               color='secondary'
               margin='normal'
@@ -56,7 +60,7 @@ const LogIn = () => {
             />
 
             <TextField
-              value={inputData.password}
+              value={password}
               onChange={onInputHandler}
               color='secondary'
               margin='normal'

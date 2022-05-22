@@ -27,13 +27,10 @@ export const useSignIn = (urlParam: string) => {
       })
 
       setFetchingStatus(response.data)
-      console.log('Response in custom hook ---> ', response)
     } catch (e) {
       console.log('Some error in custom hook', { e })
     }
   }
-
-  console.log('fetchingStatus', fetchingStatus)
 
   return { inputData, onInputHandler, fetchInputData, fetchingStatus }
 }
