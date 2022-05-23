@@ -34,7 +34,7 @@ app.post('/registration', (req, res) => {
   if (!chatRooms.hasOwnProperty(request.chatRoom)) {
     chatRooms[request.chatRoom] = {
       [request.email]: {
-        name: request.name,
+        name: request.email,
         password: request.password,
         messages: [request.message],
       },
@@ -50,7 +50,7 @@ app.post('/registration', (req, res) => {
     chatRooms[request.chatRoom] = {
       ...chatRooms[request.chatRoom],
       [request.email]: {
-        name: request.name,
+        name: request.email,
         password: request.password,
         messages: [request.message],
       },
@@ -65,7 +65,9 @@ app.post('/registration', (req, res) => {
 })
 
 // Url for logIn user
-app.post('/login', (req, res) => {})
+app.post('/login', (req, res) => {
+  return res.send({ roomUsers: chatRooms['room1'], allChats: chatRooms, status: 'OK' })
+})
 
 app.listen(port, () => {
   console.log(`🚀   Server is working on ${port} port`)
