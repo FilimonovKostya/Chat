@@ -30,7 +30,7 @@ const chatRooms = {
 // Url for registration user
 app.post('/registration', (req, res) => {
   const request = req.body
-  console.log('request',request)
+  console.log('request', request)
   if (!chatRooms.hasOwnProperty(request.chatRoom)) {
     chatRooms[request.chatRoom] = {
       [request.email]: {
@@ -43,7 +43,25 @@ app.post('/registration', (req, res) => {
     return res.send({ message: 'Room was created', status: 'OK', chatRooms })
   }
 
-  return res.send({message: 'Room already exists', status:'Exists', chatRooms})
+  if (
+    chatRooms.hasOwnProperty(request.chatRoom) &&
+    Object.keys(chatRooms[request.chatRoom]).length >= 1
+  ) {
+    chatRooms[request.chatRoom] = {
+      ...chatRooms[request.chatRoom],
+      [request.email]: {
+        name: request.name,
+        password: request.password,
+        messages: [request.message],
+      },
+    }
+
+    return res.send({
+      message: `New user was added in ${request.chatRoom}`,
+      status: 'OK',
+      chatRooms,
+    })
+  }
 })
 
 // Url for logIn user
