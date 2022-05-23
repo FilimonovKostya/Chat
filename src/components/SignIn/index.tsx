@@ -11,20 +11,18 @@ import {
 } from '@mui/material'
 import Header from './Header'
 import Footer from './Footer'
-import { useSignIn } from '../../hooks/useSignIn'
+import { useRegistration } from '../../hooks/useRegistration'
 import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
   const {
-    inputData: { email, password },
+    inputData: { email, password, chatRoom },
     onInputHandler,
     fetchInputData,
     fetchingStatus,
-  } = useSignIn('registration')
+  } = useRegistration('registration')
 
   const navigate = useNavigate()
-
-  console.log('fetchingStatus', fetchingStatus)
 
   if (fetchingStatus?.status === 'OK') {
     console.log('inside')
@@ -37,6 +35,19 @@ const SignIn = () => {
         <Header />
 
         <Box component={'form'}>
+
+          <TextField
+            value={chatRoom}
+            onChange={onInputHandler}
+            name={'chatRoom'}
+            margin={'normal'}
+            color={'secondary'}
+            label='Write number of room'
+            fullWidth
+            variant='outlined'
+            required
+          />
+
           <TextField
             value={email}
             onChange={onInputHandler}

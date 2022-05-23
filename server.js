@@ -10,42 +10,44 @@ app.use(cors())
 //  чтобы прочитать request от клиента
 app.use(bodyParser())
 
-const users = {}
-
-const checkUser = (user) => {
-  for (let key in users) {
-    if (key === user.email) {
-      return 'This user already exist'
-    }
-  }
-
-  const newUser = (users[user.email] = {
-    email: user.email,
-    password: user.password,
-  })
-
-  return { message: 'User was created', newUser, status: 'OK' }
-}
-
-const logInUser = (user) => {
-  if (users.hasOwnProperty(user.email)) {
-    return { status: 'OK' }
-  }
-
-  return { error: 'Not information about this user' }
+const chatRooms = {
+  // room1: {
+  //   user1: {
+  //     name: 'Kostya Filimonov',
+  //     password: '1234',
+  //     email: '@sobaka',
+  //     messages: ['Hello Julia'],
+  //   },
+  //   user2: {
+  //     name: 'Julia',
+  //     password: 'school',
+  //     email: '@queen',
+  //     messages: ['Hello Kostya', 'How are you ?'],
+  //   },
+  // },
 }
 
 // Url for registration user
 app.post('/registration', (req, res) => {
-  const result = checkUser(req.body)
-  res.send(result)
+  const request = req.body
+  console.log('request',request)
+  if (!chatRooms.hasOwnProperty(request.chatRoom)) {
+    chatRooms[request.chatRoom] = {
+      [request.email]: {
+        name: request.name,
+        password: request.password,
+        messages: [request.message],
+      },
+    }
+
+    return res.send({ message: 'Room was created', status: 'OK', chatRooms })
+  }
+
+  return res.send({message: 'Room already exists', status:'Exists', chatRooms})
 })
 
 // Url for logIn user
-app.post('/login', (req, res) => {
-  const result = logInUser(req.body)
-  res.send(result)
-})
+app.post('/login', (req, res) => {})
 
 app.listen(port, () => {
   console.log(`🚀   Server is working on ${port} port`)

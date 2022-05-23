@@ -3,7 +3,7 @@ import { Avatar, Box, Button, Grid, TextField, Typography } from '@mui/material'
 import reactImg from './../../assets/react.webp'
 import LoginIcon from '@mui/icons-material/Login'
 import { purple } from '@mui/material/colors'
-import { useSignIn } from '../../hooks/useSignIn'
+import { useRegistration } from '../../hooks/useRegistration'
 import { useNavigate } from 'react-router-dom'
 
 const LogIn = () => {
@@ -12,7 +12,7 @@ const LogIn = () => {
     fetchInputData,
     onInputHandler,
     fetchingStatus,
-  } = useSignIn('login')
+  } = useRegistration('login')
 
   const navigate = useNavigate()
 

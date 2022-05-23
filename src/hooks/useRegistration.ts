@@ -8,8 +8,8 @@ type ResponseSignInType = {
   status: string
 }
 
-export const useSignIn = (urlParam: string) => {
-  const [inputData, setInputData] = useState({ email: '', password: '' })
+export const useRegistration = (urlParam: string) => {
+  const [inputData, setInputData] = useState({ email: '', password: '', chatRoom: '' })
   const [fetchingStatus, setFetchingStatus] = useState<ResponseSignInType>()
 
   const onInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +24,7 @@ export const useSignIn = (urlParam: string) => {
       const response = await axios.post<ResponseSignInType>(`${URL}/${urlParam}`, {
         email: inputData.email.replaceAll(' ', ''),
         password: inputData.password.trim(),
+        chatRoom: inputData.chatRoom || 'testRoom'
       })
 
       setFetchingStatus(response.data)
