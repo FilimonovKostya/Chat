@@ -26,7 +26,7 @@ const ChatPage = () => {
       <Paper component={'main'} elevation={3} sx={{ flexGrow: 1 }}>
         <Header nameUser={name} />
         <MessageBody messages={messages} />
-        <MessageControls />
+        <MessageControls nameUser={name} />
       </Paper>
     </Container>
   )

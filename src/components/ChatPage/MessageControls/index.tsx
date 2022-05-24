@@ -3,8 +3,8 @@ import { Box, Grid, TextField, Typography } from '@mui/material'
 import { blue } from '@mui/material/colors'
 import { useMessage } from '../../../hooks/useMessage'
 
-const MessageControls = () => {
-  const { message, onMessageHandler, onSendMessage } = useMessage()
+const MessageControls = (props: { nameUser: string }) => {
+  const { message, onMessageHandler, onSendMessage } = useMessage(props.nameUser)
 
   return (
     <Grid container>
@@ -43,7 +43,9 @@ const MessageControls = () => {
           alignItems={'center'}
           height={'100%'}
         >
-          <Typography variant={'button'} onClick={onSendMessage}>Send message</Typography>
+          <Typography variant={'button'} onClick={onSendMessage}>
+            Send message
+          </Typography>
         </Box>
       </Grid>
     </Grid>

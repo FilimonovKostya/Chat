@@ -73,6 +73,26 @@ app.post('/login', (req, res) => {
   })
 })
 
+// Url for receive messages from user
+app.post('/sendMessage', (req, res) => {
+  const request = req.body
+
+  console.log('request message', request)
+  console.log('Chat room BEFORE 😊😊😊😊😊😊', chatRooms)
+
+  // Added message in chatRooms
+  chatRooms['room1'][request.user].messages.push(request.message)
+
+  console.log('Chat room AFTER 😊', chatRooms)
+
+
+  console.log('ChatRoom messages', chatRooms['room1'][request.user])
+
+  const result = chatRooms['room1'][request.user].messages
+
+  return  res.send({ status: 'Message was received', messages: result })
+})
+
 app.listen(port, () => {
   console.log(`🚀   Server is working on ${port} port`)
 })
