@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import DialogItem from './DialogItem'
 import { dialogItems } from '../../../mockData'
 
-const MessageBody = () => {
+const MessageBody = (props: { messages: string[] }) => {
   return (
     <Box
       display={'flex'}

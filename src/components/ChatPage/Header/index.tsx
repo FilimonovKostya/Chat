@@ -4,7 +4,7 @@ import { pink } from '@mui/material/colors'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined'
 
-const Header = () => {
+const Header = (props: { nameUser: string }) => {
   return (
     <>
       <AppBar position={'sticky'}>
@@ -14,7 +14,7 @@ const Header = () => {
               <AccountCircleOutlinedIcon fontSize={'large'} />
             </Avatar>
             <Typography ml={2} variant={'body1'} display={'flex'} alignItems={'center'}>
-              Kostya Filimonov
+              {props.nameUser}
             </Typography>
           </Grid>
           <Grid item display={'flex'} alignItems={'center'}>

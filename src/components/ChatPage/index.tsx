@@ -3,21 +3,29 @@ import Header from './Header'
 import MessageBody from './MessageBody'
 import { Container, Paper } from '@mui/material'
 import MessageControls from './MessageControls'
-import { useLocation, useMatch, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+
+type UrlProps = {
+  roomUsers: {
+    messages: string[]
+    name: string
+    password: string
+  }
+}
 
 const ChatPage = () => {
+  const { state } = useLocation()
+  const {
+    roomUsers: { messages, password, name },
+  } = state as UrlProps
 
-  const params  = useParams()
-  const test = useLocation()
-
-  console.log('params--->', params)
-  console.log('params--->', test)
+  console.log('params--->', state)
 
   return (
     <Container maxWidth={'md'} sx={{ my: 5 }}>
       <Paper component={'main'} elevation={3} sx={{ flexGrow: 1 }}>
-        <Header />
-        <MessageBody />
+        <Header nameUser={name} />
+        <MessageBody messages={messages} />
         <MessageControls />
       </Paper>
     </Container>

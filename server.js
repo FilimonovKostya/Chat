@@ -66,7 +66,11 @@ app.post('/registration', (req, res) => {
 
 // Url for logIn user
 app.post('/login', (req, res) => {
-  return res.send({ roomUsers: chatRooms['room1'], allChats: chatRooms, status: 'OK' })
+  return res.send({
+    roomUsers: chatRooms['room1'][req.body.email],
+    allChats: chatRooms,
+    status: 'OK',
+  })
 })
 
 app.listen(port, () => {
