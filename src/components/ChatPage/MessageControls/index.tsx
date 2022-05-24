@@ -1,8 +1,11 @@
 import React from 'react'
 import { Box, Grid, TextField, Typography } from '@mui/material'
 import { blue } from '@mui/material/colors'
+import { useMessage } from '../../../hooks/useMessage'
 
 const MessageControls = () => {
+  const { message, onMessageHandler, onSendMessage } = useMessage()
+
   return (
     <Grid container>
       <Grid item xs>
@@ -15,6 +18,8 @@ const MessageControls = () => {
             },
           }}
           fullWidth
+          value={message}
+          onChange={onMessageHandler}
           name={'message'}
           id={'message'}
           placeholder={'Type a message'}
@@ -38,7 +43,7 @@ const MessageControls = () => {
           alignItems={'center'}
           height={'100%'}
         >
-          <Typography variant={'button'}>Send message</Typography>
+          <Typography variant={'button'} onClick={onSendMessage}>Send message</Typography>
         </Box>
       </Grid>
     </Grid>
