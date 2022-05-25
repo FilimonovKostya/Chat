@@ -10,27 +10,12 @@ app.use(cors())
 //  чтобы прочитать request от клиента
 app.use(bodyParser())
 
-const chatRooms = {
-  // room1: {
-  //   user1: {
-  //     name: 'Kostya Filimonov',
-  //     password: '1234',
-  //     email: '@sobaka',
-  //     messages: ['Hello Julia'],
-  //   },
-  //   user2: {
-  //     name: 'Julia',
-  //     password: 'school',
-  //     email: '@queen',
-  //     messages: ['Hello Kostya', 'How are you ?'],
-  //   },
-  // },
-}
+const chatRooms = {}
 
 // Url for registration user
 app.post('/registration', (req, res) => {
   const request = req.body
-  console.log('request', request)
+
   if (!chatRooms.hasOwnProperty(request.chatRoom)) {
     chatRooms[request.chatRoom] = {
       [request.email]: {
@@ -77,21 +62,21 @@ app.post('/login', (req, res) => {
 app.post('/sendMessage', (req, res) => {
   const request = req.body
 
-  console.log('request message', request)
-  console.log('Chat room BEFORE 😊😊😊😊😊😊', chatRooms)
-
   // Added message in chatRooms
   chatRooms['room1'][request.user].messages.push(request.message)
 
-  console.log('Chat room AFTER 😊', chatRooms)
-
-
-  console.log('ChatRoom messages', chatRooms['room1'][request.user])
-
   const result = chatRooms['room1'][request.user].messages
 
-  return  res.send({ status: 'Message was received', messages: result })
+  return res.send({ status: 'Message was received', messages: result })
 })
+
+app.get('/messages', ((req, res) => {
+  const request = req.query
+
+  console.log('Request 😊😊😊😊😊😊', request)
+
+  res.send({chatRooms, request, message:'get messages'})
+}))
 
 app.listen(port, () => {
   console.log(`🚀   Server is working on ${port} port`)

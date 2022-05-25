@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box } from '@mui/material'
 import DialogItem from './DialogItem'
+import axios from 'axios'
+import { URL } from '../../../constants'
 
 const MessageBody = (props: { messages: string[] }) => {
+  useEffect(() => {
+    axios
+      .get(`${URL}/messages?chatRoom=room1&user=kostya`)
+      .then((res) => console.log('response', res.data))
+      .catch((error) => console.log('errrorrrrrrrr', error))
+  }, [])
+
   return (
     <Box
       display={'flex'}
