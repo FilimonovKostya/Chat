@@ -1,12 +1,8 @@
 import React from 'react'
 import { Box } from '@mui/material'
 import DialogItem from './DialogItem'
-import { useFetchMessages } from '../../../hooks/useFetchMessages'
 
 const MessageBody = (props: { messages: string[] }) => {
-  // const { messages, error } = useFetchMessages('room1', 'kostya')
-
-
   return (
     <Box
       display={'flex'}

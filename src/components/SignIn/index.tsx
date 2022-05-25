@@ -25,8 +25,7 @@ const SignIn = () => {
   const navigate = useNavigate()
 
   if (fetchingStatus?.status === 'OK') {
-    console.log('inside')
-    navigate('/login')
+    navigate('/login', { state: { chatRoom, email } })
   }
 
   return (
@@ -35,7 +34,6 @@ const SignIn = () => {
         <Header />
 
         <Box component={'form'}>
-
           <TextField
             value={chatRoom}
             onChange={onInputHandler}

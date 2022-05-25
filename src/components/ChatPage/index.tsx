@@ -4,14 +4,19 @@ import MessageBody from './MessageBody'
 import { Container, Paper } from '@mui/material'
 import MessageControls from './MessageControls'
 import { useMessage } from '../../hooks/useMessage'
+import { useLocation } from 'react-router-dom'
 
 const ChatPage = () => {
-  const { message, onMessageHandler, onSendMessage, messages } = useMessage('kostya', 'room1')
+  const urlData: any = useLocation()
+  const { message, onMessageHandler, onSendMessage, messages } = useMessage(
+    urlData.state.email,
+    urlData.state.chatRoom
+  )
 
   return (
     <Container maxWidth={'md'} sx={{ my: 5 }}>
       <Paper component={'main'} elevation={3} sx={{ flexGrow: 1 }}>
-        <Header nameUser={'kostya'} />
+        <Header nameUser={urlData.state.email} />
         <MessageBody messages={messages} />
         <MessageControls
           message={message}

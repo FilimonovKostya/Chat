@@ -4,7 +4,7 @@ import reactImg from './../../assets/react.webp'
 import LoginIcon from '@mui/icons-material/Login'
 import { purple } from '@mui/material/colors'
 import { useRegistration } from '../../hooks/useRegistration'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const LogIn = () => {
   const {
@@ -14,10 +14,13 @@ const LogIn = () => {
     fetchingStatus,
   } = useRegistration('login')
 
+  const urlData = useLocation()
+
   const navigate = useNavigate()
 
   if (fetchingStatus?.status === 'OK') {
-    navigate('/chat')
+    // @ts-ignore
+    navigate('/chat', { state: { chatRoom: urlData.state.chatRoom, email: urlData.state.email } })
   }
 
   return (

@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import { URL } from '../constants'
 
-export const useMessage = (user?: string, chatRoom?:string) => {
+export const useMessage = (user: string, chatRoom: string) => {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState<Array<any>>([])
 
@@ -21,16 +21,13 @@ export const useMessage = (user?: string, chatRoom?:string) => {
     }
   }
 
+  // Receive messages only firs rendering
   useEffect(() => {
-    console.log('useEffect')
     axios
       .get(`${URL}/messages?chatRoom=${chatRoom}&user=${user}`)
       .then((res) => setMessages(res.data.result))
       .catch((error) => console.log(error))
   }, [])
-
-
-  console.log('messages',messages)
 
   return { message, onMessageHandler, onSendMessage, messages }
 }
