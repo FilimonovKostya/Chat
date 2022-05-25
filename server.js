@@ -59,24 +59,27 @@ app.post('/login', (req, res) => {
 })
 
 // Url for receive messages from user
-app.post('/sendMessage', (req, res) => {
+app.post('/messages', (req, res) => {
   const request = req.body
 
   // Added message in chatRooms
   chatRooms['room1'][request.user].messages.push(request.message)
 
-  const result = chatRooms['room1'][request.user].messages
+  const result =
+    chatRooms['room1'][request.user].messages[chatRooms['room1'][request.user].messages.length - 1]
 
-  return res.send({ status: 'Message was received', messages: result })
+  return res.send({ status: 'Message was received', messages: [result], chatRooms })
 })
 
-app.get('/messages', ((req, res) => {
+// Url from getting messages on client
+app.get('/messages', (req, res) => {
   const request = req.query
 
   console.log('Request 😊😊😊😊😊😊', request)
+  const result = chatRooms[request.chatRoom][request.user].messages
 
-  res.send({chatRooms, request, message:'get messages'})
-}))
+  res.send({ result, request, message: 'get messages' })
+})
 
 app.listen(port, () => {
   console.log(`🚀   Server is working on ${port} port`)

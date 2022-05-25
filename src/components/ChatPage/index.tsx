@@ -5,21 +5,8 @@ import { Container, Paper } from '@mui/material'
 import MessageControls from './MessageControls'
 import { useMessage } from '../../hooks/useMessage'
 
-type UrlProps = {
-  roomUsers: {
-    messages: string[]
-    name: string
-    password: string
-  }
-}
-
 const ChatPage = () => {
-  // const { state } = useLocation()
-  // const {
-  //   roomUsers: { name },
-  // } = state as UrlProps
-
-  const { message, onMessageHandler, onSendMessage, messages } = useMessage('kostya')
+  const { message, onMessageHandler, onSendMessage, messages } = useMessage('kostya', 'room1')
 
   return (
     <Container maxWidth={'md'} sx={{ my: 5 }}>

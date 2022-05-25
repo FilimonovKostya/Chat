@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Box } from '@mui/material'
 import DialogItem from './DialogItem'
-import axios from 'axios'
-import { URL } from '../../../constants'
+import { useFetchMessages } from '../../../hooks/useFetchMessages'
 
 const MessageBody = (props: { messages: string[] }) => {
-  useEffect(() => {
-    axios
-      .get(`${URL}/messages?chatRoom=room1&user=kostya`)
-      .then((res) => console.log('response', res.data))
-      .catch((error) => console.log('errrorrrrrrrr', error))
-  }, [])
+  // const { messages, error } = useFetchMessages('room1', 'kostya')
+
 
   return (
     <Box
