@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box } from '@mui/material'
 import DialogItem from './DialogItem'
-import { dialogItems } from '../../../mockData'
 
 const MessageBody = (props: { messages: string[] }) => {
   return (
@@ -13,8 +12,8 @@ const MessageBody = (props: { messages: string[] }) => {
       alignItems={'flex-end'}
       p={2}
     >
-      {dialogItems.map((dialog) => (
-        <DialogItem key={dialog.id} message={dialog.message} time={dialog.time} />
+      {props.messages.map((message, index) => (
+        <DialogItem key={index} message={message} time={'12-15-30'} />
       ))}
     </Box>
   )

@@ -17,7 +17,7 @@ const LogIn = () => {
   const navigate = useNavigate()
 
   if (fetchingStatus?.status === 'OK') {
-    navigate('/chat', {state: fetchingStatus})
+    navigate('/chat')
   }
 
   return (

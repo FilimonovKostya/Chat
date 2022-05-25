@@ -36,7 +36,7 @@ app.post('/registration', (req, res) => {
       [request.email]: {
         name: request.email,
         password: request.password,
-        messages: [request.message],
+        messages: [],
       },
     }
 
@@ -52,7 +52,7 @@ app.post('/registration', (req, res) => {
       [request.email]: {
         name: request.email,
         password: request.password,
-        messages: [request.message],
+        messages: [],
       },
     }
 

@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { Box, Grid, TextField, Typography } from '@mui/material'
 import { blue } from '@mui/material/colors'
-import { useMessage } from '../../../hooks/useMessage'
 
-const MessageControls = (props: { nameUser: string }) => {
-  const { message, onMessageHandler, onSendMessage } = useMessage(props.nameUser)
+type MessageControlsProps = {
+  message: string
+  onMessageHandler: (e: ChangeEvent<HTMLInputElement>) => void
+  onSendMessage: () => void
+}
 
+const MessageControls = ({ message, onMessageHandler, onSendMessage }: MessageControlsProps) => {
   return (
     <Grid container>
       <Grid item xs>
