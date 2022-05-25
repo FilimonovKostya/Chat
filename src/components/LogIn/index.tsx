@@ -6,21 +6,20 @@ import { purple } from '@mui/material/colors'
 import { useRegistration } from '../../hooks/useRegistration'
 import { useLocation, useNavigate } from 'react-router-dom'
 
+type UrlDataType = {
+  chatRoom: string
+  email: string
+}
+
 const LogIn = () => {
-  const {
-    inputData: { email, password },
-    fetchInputData,
-    onInputHandler,
-    fetchingStatus,
-  } = useRegistration('login')
-
-  const urlData = useLocation()
-
+  const { state } = useLocation()
   const navigate = useNavigate()
+  const { email, chatRoom } = state as UrlDataType
+
+  const { inputData, fetchInputData, onInputHandler, fetchingStatus } = useRegistration('login', chatRoom)
 
   if (fetchingStatus?.status === 'OK') {
-    // @ts-ignore
-    navigate('/chat', { state: { chatRoom: urlData.state.chatRoom, email: urlData.state.email } })
+    navigate('/chat', { state: { chatRoom, email } })
   }
 
   return (
@@ -49,7 +48,7 @@ const LogIn = () => {
 
           <Box component={'form'}>
             <TextField
-              value={email}
+              value={inputData.email}
               onChange={onInputHandler}
               color='secondary'
               margin='normal'
@@ -63,7 +62,7 @@ const LogIn = () => {
             />
 
             <TextField
-              value={password}
+              value={inputData.password}
               onChange={onInputHandler}
               color='secondary'
               margin='normal'

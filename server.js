@@ -52,7 +52,7 @@ app.post('/registration', (req, res) => {
 // Url for logIn user
 app.post('/login', (req, res) => {
   return res.send({
-    roomUsers: chatRooms['room1'][req.body.email],
+    roomUsers: chatRooms[req.body.chatRoom][req.body.email],
     allChats: chatRooms,
     status: 'OK',
   })
@@ -63,10 +63,12 @@ app.post('/messages', (req, res) => {
   const request = req.body
 
   // Added message in chatRooms
-  chatRooms['room1'][request.user].messages.push(request.message)
+  chatRooms[request.chatRoom][request.user].messages.push(request.message)
 
   const result =
-    chatRooms['room1'][request.user].messages[chatRooms['room1'][request.user].messages.length - 1]
+    chatRooms[request.chatRoom][request.user].messages[
+      chatRooms[request.chatRoom][request.user].messages.length - 1
+    ]
 
   return res.send({ status: 'Message was received', messages: [result], chatRooms })
 })
@@ -75,7 +77,6 @@ app.post('/messages', (req, res) => {
 app.get('/messages', (req, res) => {
   const request = req.query
 
-  console.log('Request 😊😊😊😊😊😊', request)
   const result = chatRooms[request.chatRoom][request.user].messages
 
   res.send({ result, request, message: 'get messages' })

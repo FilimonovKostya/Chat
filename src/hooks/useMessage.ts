@@ -4,7 +4,7 @@ import { URL } from '../constants'
 
 export const useMessage = (user: string, chatRoom: string) => {
   const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState<Array<any>>([])
+  const [messages, setMessages] = useState<string[]>([])
 
   const onMessageHandler = (e: ChangeEvent<HTMLInputElement>) => setMessage(e.currentTarget.value)
 
@@ -13,6 +13,7 @@ export const useMessage = (user: string, chatRoom: string) => {
       const response = await axios.post(`${URL}/messages`, {
         message,
         user,
+        chatRoom,
       })
 
       setMessages((prevState) => [...prevState, response.data.messages])
