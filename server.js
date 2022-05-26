@@ -25,7 +25,7 @@ app.post('/registration', (req, res) => {
       },
     }
 
-    res.send({ message: 'Room was created', status: 'OK', chatRooms })
+    return res.send({ message: 'Room was created', status: 'OK', chatRooms })
   }
 
   if (
@@ -41,18 +41,28 @@ app.post('/registration', (req, res) => {
       },
     }
 
-    res.send({
+    return res.send({
       message: `New user was added in ${request.chatRoom}`,
       status: 'OK',
       chatRooms,
     })
   }
+
+  res.send({ status: 'Error in registration' })
 })
 
 // Url for logIn user
 app.post('/login', (req, res) => {
+  const request = req.body
+
+  if (!chatRooms[request.chatRoom].hasOwnProperty(request.email)) {
+    return res.send({ status: 'Not find the user', allChats: chatRooms })
+  }
+
+  console.log('tut')
+
   res.send({
-    roomUsers: chatRooms[req.body.chatRoom][req.body.email],
+    roomUsers: chatRooms[request.chatRoom][request.email],
     allChats: chatRooms,
     status: 'OK',
   })
