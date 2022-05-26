@@ -25,7 +25,7 @@ app.post('/registration', (req, res) => {
       },
     }
 
-    return res.send({ message: 'Room was created', status: 'OK', chatRooms })
+    res.send({ message: 'Room was created', status: 'OK', chatRooms })
   }
 
   if (
@@ -41,7 +41,7 @@ app.post('/registration', (req, res) => {
       },
     }
 
-    return res.send({
+    res.send({
       message: `New user was added in ${request.chatRoom}`,
       status: 'OK',
       chatRooms,
@@ -51,7 +51,7 @@ app.post('/registration', (req, res) => {
 
 // Url for logIn user
 app.post('/login', (req, res) => {
-  return res.send({
+  res.send({
     roomUsers: chatRooms[req.body.chatRoom][req.body.email],
     allChats: chatRooms,
     status: 'OK',
@@ -61,16 +61,14 @@ app.post('/login', (req, res) => {
 // Url for receive messages from user
 app.post('/messages', (req, res) => {
   const request = req.body
+  const room = chatRooms[request.chatRoom][request.user]
 
   // Added message in chatRooms
-  chatRooms[request.chatRoom][request.user].messages.push(request.message)
+  room.messages.push(request.message)
 
-  const result =
-    chatRooms[request.chatRoom][request.user].messages[
-      chatRooms[request.chatRoom][request.user].messages.length - 1
-    ]
+  const result = room.messages[room.messages.length - 1]
 
-  return res.send({ status: 'Message was received', messages: [result], chatRooms })
+  res.send({ status: 'Message was received', messages: [result], chatRooms })
 })
 
 // Url from getting messages on client
