@@ -6,17 +6,21 @@ import MessageControls from './MessageControls'
 import { useMessage } from '../../hooks/useMessage'
 import { useLocation } from 'react-router-dom'
 
+type UrlDataType = {
+  email: string
+  chatRoom: string
+}
+
 const ChatPage = () => {
-  const urlData: any = useLocation()
-  const { message, onMessageHandler, onSendMessage, messages } = useMessage(
-    urlData.state.email,
-    urlData.state.chatRoom
-  )
+  const { state } = useLocation()
+  const { email, chatRoom } = state as UrlDataType
+
+  const { message, onMessageHandler, onSendMessage, messages } = useMessage(email, chatRoom)
 
   return (
     <Container maxWidth={'md'} sx={{ my: 5 }}>
       <Paper component={'main'} elevation={3} sx={{ flexGrow: 1 }}>
-        <Header nameUser={urlData.state.email} />
+        <Header nameUser={email} />
         <MessageBody messages={messages} />
         <MessageControls
           message={message}

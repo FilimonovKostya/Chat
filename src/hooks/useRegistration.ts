@@ -18,7 +18,7 @@ export const useRegistration = (urlParam: string, chatRoom?: string) => {
       [e.target.name]: e.target.value,
     }))
   }
-  console.log('chatRoom',inputData.chatRoom)
+
   const fetchInputData = async () => {
     try {
       const response = await axios.post<ResponseSignInType>(`${URL}/${urlParam}`, {

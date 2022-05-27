@@ -59,8 +59,6 @@ app.post('/login', (req, res) => {
     return res.send({ status: 'Not find the user', allChats: chatRooms })
   }
 
-  console.log('tut')
-
   res.send({
     roomUsers: chatRooms[request.chatRoom][request.email],
     allChats: chatRooms,
