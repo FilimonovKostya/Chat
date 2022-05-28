@@ -25,7 +25,7 @@ app.post('/registration', (req, res) => {
       },
     }
 
-    return res.send({ message: 'Room was created', status: 'OK', chatRooms })
+    return res.send({ status: 'OK' })
   }
 
   if (
@@ -43,8 +43,6 @@ app.post('/registration', (req, res) => {
 
     return res.send({
       message: `New user was added in ${request.chatRoom}`,
-      status: 'OK',
-      chatRooms,
     })
   }
 
@@ -56,7 +54,11 @@ app.post('/login', (req, res) => {
   const request = req.body
 
   if (!chatRooms[request.chatRoom].hasOwnProperty(request.email)) {
-    return res.send({ status: 'Not find the user' })
+    return res.send({ status: 'Not found the user', chatRooms })
+  }
+
+  if (chatRooms[request.chatRoom][request.email].password !== request.password) {
+    return res.send({ status: 'Incorrect password', chatRooms })
   }
 
   res.send({
@@ -76,7 +78,7 @@ app.post('/messages', (req, res) => {
 
   const result = room.messages[room.messages.length - 1]
 
-  res.send({ status: 'Message was received', messages: [result], chatRooms })
+  res.send({ messages: [result] })
 })
 
 // Url from getting messages on client
@@ -85,7 +87,7 @@ app.get('/messages', (req, res) => {
 
   const result = chatRooms[request.chatRoom][request.user.replaceAll(' ', '')].messages
 
-  res.send({ result, request, message: 'get messages' })
+  res.send({ result })
 })
 
 app.listen(port, () => {
