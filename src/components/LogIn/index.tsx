@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Box, Button, Grid, TextField, Typography } from '@mui/material'
+import { Alert, Avatar, Box, Button, Grid, TextField, Typography } from '@mui/material'
 import reactImg from './../../assets/react.webp'
 import LoginIcon from '@mui/icons-material/Login'
 import { purple } from '@mui/material/colors'
@@ -16,7 +16,8 @@ const LogIn = () => {
   const navigate = useNavigate()
   const { email, chatRoom } = state as UrlDataType
 
-  const { inputData, fetchInputData, onInputHandler, fetchingStatus } = useRegistration('login', chatRoom)
+  const { inputData, fetchInputData, onInputHandler, fetchingStatus, errorMessage } =
+    useRegistration('login', chatRoom)
 
   if (fetchingStatus?.status === 'OK') {
     navigate('/chat', { state: { chatRoom, email } })
@@ -46,7 +47,7 @@ const LogIn = () => {
             Log in
           </Typography>
 
-          <Box component={'form'}>
+          <Box component={'form'} onSubmit={fetchInputData}>
             <TextField
               value={inputData.email}
               onChange={onInputHandler}
@@ -73,12 +74,18 @@ const LogIn = () => {
               variant='outlined'
               type='password'
               fullWidth
+              required
             />
 
-            <Button onClick={fetchInputData} sx={{ mt: 2 }} variant='outlined' color='secondary'>
+            <Button sx={{ mt: 2 }} type={'submit'} variant='outlined' color='secondary'>
               Log in
             </Button>
           </Box>
+          {errorMessage && (
+            <Alert sx={{ position: 'absolute', bottom: 10 }} variant='filled' severity='error'>
+              {errorMessage}
+            </Alert>
+          )}
         </Box>
       </Grid>
     </Grid>

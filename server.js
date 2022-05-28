@@ -56,7 +56,7 @@ app.post('/login', (req, res) => {
   const request = req.body
 
   if (!chatRooms[request.chatRoom].hasOwnProperty(request.email)) {
-    return res.send({ status: 'Not find the user', allChats: chatRooms })
+    return res.send({ status: 'Not find the user' })
   }
 
   res.send({
@@ -83,7 +83,7 @@ app.post('/messages', (req, res) => {
 app.get('/messages', (req, res) => {
   const request = req.query
 
-  const result = chatRooms[request.chatRoom][request.user].messages
+  const result = chatRooms[request.chatRoom][request.user.replaceAll(' ', '')].messages
 
   res.send({ result, request, message: 'get messages' })
 })

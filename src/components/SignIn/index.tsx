@@ -6,6 +6,7 @@ import {
   Container,
   FormControlLabel,
   Grid,
+  LinearProgress,
   Link,
   TextField,
 } from '@mui/material'
@@ -32,8 +33,11 @@ const SignIn = () => {
     <Container maxWidth={'xs'} sx={{ mt: 15 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Header />
+        <Box sx={{ width: '100%' }}>
+          <LinearProgress />
+        </Box>
 
-        <Box component={'form'}>
+        <Box component={'form'} onSubmit={fetchInputData}>
           <TextField
             value={chatRoom}
             onChange={onInputHandler}
@@ -43,7 +47,6 @@ const SignIn = () => {
             label='Write number of room'
             fullWidth
             variant='outlined'
-            required
           />
 
           <TextField
@@ -76,7 +79,7 @@ const SignIn = () => {
             label={'Remember me'}
           />
 
-          <Button variant='contained' onClick={fetchInputData} sx={{ mt: 1 }} fullWidth>
+          <Button variant='contained' type={'submit'} sx={{ mt: 1 }} fullWidth>
             Sign in
           </Button>
 

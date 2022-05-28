@@ -11,6 +11,8 @@ type ResponseSignInType = {
 export const useRegistration = (urlParam: string, chatRoom?: string) => {
   const [inputData, setInputData] = useState({ email: '', password: '', chatRoom: '' })
   const [fetchingStatus, setFetchingStatus] = useState<ResponseSignInType>()
+  const [errorMessage, setErrorMessage] = useState('')
+  const [isFetching, setIsFetching] = useState(false)
 
   const onInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setInputData((prevState) => ({
@@ -19,7 +21,9 @@ export const useRegistration = (urlParam: string, chatRoom?: string) => {
     }))
   }
 
-  const fetchInputData = async () => {
+  const fetchInputData = async (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
     try {
       const response = await axios.post<ResponseSignInType>(`${URL}/${urlParam}`, {
         email: inputData.email.replaceAll(' ', ''),
@@ -28,10 +32,11 @@ export const useRegistration = (urlParam: string, chatRoom?: string) => {
       })
 
       setFetchingStatus(response.data)
+      setErrorMessage(response.data.status)
     } catch (e) {
-      console.log('Some error in custom hook', { e })
+      setErrorMessage(JSON.stringify(e))
     }
   }
 
-  return { inputData, onInputHandler, fetchInputData, fetchingStatus }
+  return { inputData, onInputHandler, fetchInputData, fetchingStatus, errorMessage }
 }
