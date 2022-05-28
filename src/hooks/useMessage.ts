@@ -6,6 +6,7 @@ export const useMessage = (user: string, chatRoom: string) => {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState<string[]>([])
   const [isFetching, setIsFetching] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const onMessageHandler = (e: ChangeEvent<HTMLInputElement>) => setMessage(e.currentTarget.value)
 
@@ -19,7 +20,7 @@ export const useMessage = (user: string, chatRoom: string) => {
 
       setMessages((prevState) => [...prevState, response.data.messages])
     } catch (e) {
-      console.log('Some error in useMessage hook', { e })
+      setErrorMessage(JSON.stringify(e))
     }
   }
 
@@ -36,5 +37,5 @@ export const useMessage = (user: string, chatRoom: string) => {
       .catch((error) => console.log(error))
   }, [])
 
-  return { message, onMessageHandler, onSendMessage, messages, isFetching }
+  return { message, onMessageHandler, onSendMessage, messages, isFetching, errorMessage }
 }

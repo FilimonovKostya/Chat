@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import MessageBody from './MessageBody'
-import { Container, Paper } from '@mui/material'
+import { Alert, Container, Paper } from '@mui/material'
 import MessageControls from './MessageControls'
 import { useMessage } from '../../hooks/useMessage'
 import { useLocation } from 'react-router-dom'
@@ -15,10 +15,8 @@ const ChatPage = () => {
   const { state } = useLocation()
   const { email, chatRoom } = state as UrlDataType
 
-  const { message, onMessageHandler, onSendMessage, messages, isFetching } = useMessage(
-    email,
-    chatRoom
-  )
+  const { message, onMessageHandler, onSendMessage, messages, isFetching, errorMessage } =
+    useMessage(email, chatRoom)
 
   return (
     <>
@@ -33,6 +31,22 @@ const ChatPage = () => {
           />
         </Paper>
       </Container>
+      {errorMessage && (
+        <Alert
+          sx={{
+            position: 'absolute',
+            bottom: 50,
+            maxWidth: '250px',
+            width: '100%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+          }}
+          variant='filled'
+          severity='error'
+        >
+          {errorMessage}
+        </Alert>
+      )}
     </>
   )
 }
