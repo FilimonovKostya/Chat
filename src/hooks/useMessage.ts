@@ -10,7 +10,10 @@ export const useMessage = (user: string, chatRoom: string) => {
 
   const onMessageHandler = (e: ChangeEvent<HTMLInputElement>) => setMessage(e.currentTarget.value)
 
-  const onSendMessage = async () => {
+  const onSendMessage = async (event: ChangeEvent<HTMLDivElement>) => {
+    event.preventDefault()
+    setMessage('')
+
     try {
       const response = await axios.post(`${URL}/messages`, {
         message,

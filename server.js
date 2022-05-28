@@ -42,6 +42,7 @@ app.post('/registration', (req, res) => {
     }
 
     return res.send({
+      status: 'OK',
       message: `New user was added in ${request.chatRoom}`,
     })
   }
