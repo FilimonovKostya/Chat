@@ -24,6 +24,8 @@ export const useRegistration = (urlParam: string, chatRoom?: string) => {
   const fetchInputData = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault()
 
+    setIsFetching(true)
+
     try {
       const response = await axios.post<ResponseSignInType>(`${URL}/${urlParam}`, {
         email: inputData.email.replaceAll(' ', ''),
@@ -33,10 +35,11 @@ export const useRegistration = (urlParam: string, chatRoom?: string) => {
 
       setFetchingStatus(response.data)
       setErrorMessage(response.data.status)
+      setIsFetching(false)
     } catch (e) {
       setErrorMessage(JSON.stringify(e))
     }
   }
 
-  return { inputData, onInputHandler, fetchInputData, fetchingStatus, errorMessage }
+  return { inputData, onInputHandler, fetchInputData, fetchingStatus, errorMessage, isFetching }
 }

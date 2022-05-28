@@ -5,6 +5,7 @@ import { URL } from '../constants'
 export const useMessage = (user: string, chatRoom: string) => {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState<string[]>([])
+  const [isFetching, setIsFetching] = useState(false)
 
   const onMessageHandler = (e: ChangeEvent<HTMLInputElement>) => setMessage(e.currentTarget.value)
 
@@ -22,13 +23,18 @@ export const useMessage = (user: string, chatRoom: string) => {
     }
   }
 
-  // Receive messages only firs rendering
+  // Receive messages only first rendering
   useEffect(() => {
+    setIsFetching(true)
+
     axios
       .get(`${URL}/messages?chatRoom=${chatRoom}&user=${user}`)
-      .then((res) => setMessages(res.data.result))
+      .then((res) => {
+        setMessages(res.data.result)
+        setIsFetching(false)
+      })
       .catch((error) => console.log(error))
   }, [])
 
-  return { message, onMessageHandler, onSendMessage, messages }
+  return { message, onMessageHandler, onSendMessage, messages, isFetching }
 }

@@ -15,20 +15,25 @@ const ChatPage = () => {
   const { state } = useLocation()
   const { email, chatRoom } = state as UrlDataType
 
-  const { message, onMessageHandler, onSendMessage, messages } = useMessage(email, chatRoom)
+  const { message, onMessageHandler, onSendMessage, messages, isFetching } = useMessage(
+    email,
+    chatRoom
+  )
 
   return (
-    <Container maxWidth={'md'} sx={{ my: 5 }}>
-      <Paper component={'main'} elevation={3} sx={{ flexGrow: 1 }}>
-        <Header nameUser={email} />
-        <MessageBody messages={messages} />
-        <MessageControls
-          message={message}
-          onMessageHandler={onMessageHandler}
-          onSendMessage={onSendMessage}
-        />
-      </Paper>
-    </Container>
+    <>
+      <Container maxWidth={'md'} sx={{ my: 5 }}>
+        <Paper component={'main'} elevation={3} sx={{ flexGrow: 1 }}>
+          <Header nameUser={email} />
+          <MessageBody messages={messages} isFetching={isFetching} />
+          <MessageControls
+            message={message}
+            onMessageHandler={onMessageHandler}
+            onSendMessage={onSendMessage}
+          />
+        </Paper>
+      </Container>
+    </>
   )
 }
 
