@@ -8,13 +8,13 @@ type Messages = {
   messages: string[]
 }
 
-type ResponseMessages = {
+export type ResponseMessages = {
   [key: string]: Messages
 }
 
 export const useMessage = (user: string, chatRoom: string) => {
   const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState<{ [key: string]: Messages }>({})
+  const [messages, setMessages] = useState<ResponseMessages >({})
   const [isFetching, setIsFetching] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 

@@ -1,36 +1,23 @@
 import React from 'react'
-import { Box } from '@mui/material'
 import DialogItem from './DialogItem'
 import Circular from '../../Circular'
+import { ResponseMessages } from '../../../hooks/useMessage'
 
 const MessageBody = (props: {
-  messages: any
+  messages: ResponseMessages
   isFetching: boolean
   email: string
-  users: string
+  user: string
 }) => {
-
-  console.log('users',props.users)
-  console.log('messages',props.messages)
   return (
-    <Box
-      position={'relative'}
-      display={'flex'}
-      sx={{ overflowX: 'hidden' }}
-      flexDirection={'column'}
-      // height={500}
-      alignItems={'flex-end'}
-      p={2}
-    >
+    <>
       {props.isFetching && <Circular />}
 
       {props.messages[props.email] &&
-        props.messages[props.users].messages.map((message: any, index: any) => (
-          <DialogItem key={index} message={message} email={props.email} user={props.users} />
+        props.messages[props.user].messages.map((message, index) => (
+          <DialogItem key={index} message={message} email={props.email} user={props.user} />
         ))}
-
-
-    </Box>
+    </>
   )
 }
 

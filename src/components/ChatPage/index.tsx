@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import MessageBody from './MessageBody'
-import { Alert, Container, Paper } from '@mui/material'
+import { Alert, Box, Container, Paper } from '@mui/material'
 import MessageControls from './MessageControls'
 import { useMessage } from '../../hooks/useMessage'
 import { useLocation } from 'react-router-dom'
@@ -24,22 +24,25 @@ const ChatPage = () => {
       <Container maxWidth={'md'} sx={{ my: 5 }}>
         <Paper component={'main'} elevation={3} sx={{ flexGrow: 1 }}>
           <Header nameUser={email} />
-          {/*<MessageBody*/}
-          {/*  messages={messages ? messages : []}*/}
-          {/*  isFetching={isFetching}*/}
-          {/*  email={email}*/}
-          {/*  users={users}*/}
-          {/*/>*/}
 
-          {users.map((user,index) => (
-            <MessageBody
-              key={index}
-              messages={messages ? messages : []}
-              isFetching={isFetching}
-              email={email}
-              users={user}
-            />
-          ))}
+          <Box
+            height={500}
+            sx={{ overflowX: 'hidden' }}
+            display={'flex'}
+            flexDirection={'column'}
+            py={2}
+            px={3}
+          >
+            {users.map((user, index) => (
+              <MessageBody
+                key={index}
+                messages={messages ?? {}}
+                isFetching={isFetching}
+                email={email}
+                user={user}
+              />
+            ))}
+          </Box>
 
           <MessageControls
             message={message}
