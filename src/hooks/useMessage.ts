@@ -35,7 +35,6 @@ export const useMessage = (user: string, chatRoom: string) => {
       )
 
       setMessages((prevState) => {
-        console.log('prevState', prevState)
         return {
           ...prevState,
           [user]: {

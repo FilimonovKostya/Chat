@@ -9,6 +9,7 @@ const DialogItem = (props: { message: string }) => {
       p={1}
       display={'flex'}
       flexDirection={'column'}
+      // alignSelf={'flex-start'}
       boxShadow={4}
       bgcolor={blue[100]}
       maxWidth={350}

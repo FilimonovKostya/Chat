@@ -3,7 +3,15 @@ import { Box } from '@mui/material'
 import DialogItem from './DialogItem'
 import Circular from '../../Circular'
 
-const MessageBody = (props: { messages: string[]; isFetching: boolean }) => {
+const MessageBody = (props: {
+  messages: any
+  isFetching: boolean
+  email: string
+  users: string
+}) => {
+
+  console.log('users',props.users)
+  console.log('messages',props.messages)
   return (
     <Box
       position={'relative'}
@@ -15,9 +23,13 @@ const MessageBody = (props: { messages: string[]; isFetching: boolean }) => {
       p={2}
     >
       {props.isFetching && <Circular />}
-      {props.messages.map((message, index) => (
-        <DialogItem key={index} message={message} />
-      ))}
+
+      {props.messages[props.email] &&
+        props.messages[props.users].messages.map((message: any, index: any) => (
+          <DialogItem key={index} message={message} />
+        ))}
+
+
     </Box>
   )
 }

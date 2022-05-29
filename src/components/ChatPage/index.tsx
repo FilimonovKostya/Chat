@@ -17,16 +17,30 @@ const ChatPage = () => {
 
   const { message, onMessageHandler, onSendMessage, messages, isFetching, errorMessage } =
     useMessage(email, chatRoom)
+  const users = Object.keys(messages)
 
   return (
     <>
       <Container maxWidth={'md'} sx={{ my: 5 }}>
         <Paper component={'main'} elevation={3} sx={{ flexGrow: 1 }}>
           <Header nameUser={email} />
-          <MessageBody
-            messages={messages[email] ? messages[email].messages : []}
-            isFetching={isFetching}
-          />
+          {/*<MessageBody*/}
+          {/*  messages={messages ? messages : []}*/}
+          {/*  isFetching={isFetching}*/}
+          {/*  email={email}*/}
+          {/*  users={users}*/}
+          {/*/>*/}
+
+          {users.map((user,index) => (
+            <MessageBody
+              key={index}
+              messages={messages ? messages : []}
+              isFetching={isFetching}
+              email={email}
+              users={user}
+            />
+          ))}
+
           <MessageControls
             message={message}
             onMessageHandler={onMessageHandler}
