@@ -23,7 +23,10 @@ const ChatPage = () => {
       <Container maxWidth={'md'} sx={{ my: 5 }}>
         <Paper component={'main'} elevation={3} sx={{ flexGrow: 1 }}>
           <Header nameUser={email} />
-          <MessageBody messages={['messages']} isFetching={isFetching} />
+          <MessageBody
+            messages={messages[email] ? messages[email].messages : []}
+            isFetching={isFetching}
+          />
           <MessageControls
             message={message}
             onMessageHandler={onMessageHandler}

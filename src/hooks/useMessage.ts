@@ -14,10 +14,7 @@ type ResponseMessages = {
 
 export const useMessage = (user: string, chatRoom: string) => {
   const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState<{ [key: string]: Messages }>({
-    // ['demo']: { messages: ['demo message'], name: 'Demo', password: '' },
-    // ['testDemo']: { messages: ['testDemo messages'], name: 'TestDemo', password: '' },
-  })
+  const [messages, setMessages] = useState<{ [key: string]: Messages }>({})
   const [isFetching, setIsFetching] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 

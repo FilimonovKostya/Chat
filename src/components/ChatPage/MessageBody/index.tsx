@@ -15,8 +15,8 @@ const MessageBody = (props: { messages: string[]; isFetching: boolean }) => {
       p={2}
     >
       {props.isFetching && <Circular />}
-      {['props.messages'].map((message, index) => (
-        <DialogItem key={index} message={message}  />
+      {props.messages.map((message, index) => (
+        <DialogItem key={index} message={message} />
       ))}
     </Box>
   )
