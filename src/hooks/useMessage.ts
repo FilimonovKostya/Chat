@@ -2,9 +2,22 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import { URL } from '../constants'
 
+type Messages = {
+  name: string
+  password: string
+  messages: string[]
+}
+
+type ResponseMessages = {
+  [key: string]: Messages
+}
+
 export const useMessage = (user: string, chatRoom: string) => {
   const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState<string[]>([])
+  const [messages, setMessages] = useState<{ [key: string]: Messages }>({
+    // ['demo']: { messages: ['demo message'], name: 'Demo', password: '' },
+    // ['testDemo']: { messages: ['testDemo messages'], name: 'TestDemo', password: '' },
+  })
   const [isFetching, setIsFetching] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -15,13 +28,25 @@ export const useMessage = (user: string, chatRoom: string) => {
     setMessage('')
 
     try {
-      const response = await axios.post(`${URL}/messages`, {
-        message,
-        user,
-        chatRoom,
-      })
+      const response = await axios.post<{ result: ResponseMessages; lastMessage: string }>(
+        `${URL}/messages`,
+        {
+          message,
+          user,
+          chatRoom,
+        }
+      )
 
-      setMessages((prevState) => [...prevState, response.data.messages])
+      setMessages((prevState) => {
+        console.log('prevState', prevState)
+        return {
+          ...prevState,
+          [user]: {
+            ...prevState[user],
+            messages: [...prevState[user].messages, response.data.lastMessage],
+          },
+        }
+      })
     } catch (e) {
       setErrorMessage(JSON.stringify(e))
     }

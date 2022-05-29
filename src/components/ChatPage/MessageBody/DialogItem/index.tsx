@@ -2,12 +2,7 @@ import React from 'react'
 import { Box, Typography } from '@mui/material'
 import { blue } from '@mui/material/colors'
 
-type DialogItemProps = {
-  message: string
-  time: string
-}
-
-const DialogItem = ({ message, time }: DialogItemProps) => {
+const DialogItem = (props: { message: string }) => {
   return (
     <Box
       my={1}
@@ -17,14 +12,11 @@ const DialogItem = ({ message, time }: DialogItemProps) => {
       boxShadow={4}
       bgcolor={blue[100]}
       maxWidth={350}
-      width={'100%'}
+      sx={{wordBreak:'break-word'}}
       borderRadius={3}
     >
       <Typography variant={'body1'} color={'#4e4242'}>
-        {message}
-      </Typography>
-      <Typography mt={1} alignSelf={'flex-end'} color={'#4e4242'} variant={'caption'}>
-        {time}
+        {props.message}
       </Typography>
     </Box>
   )

@@ -77,16 +77,17 @@ app.post('/messages', (req, res) => {
   // Added message in chatRooms
   room.messages.push(request.message)
 
-  const result = room.messages[room.messages.length - 1]
+  const result = chatRooms[request.chatRoom]
+  const lastMessage = room.messages[room.messages.length - 1]
 
-  res.send({ messages: [result] })
+  res.send({ result, lastMessage })
 })
 
 // Url from getting messages on client
 app.get('/messages', (req, res) => {
   const request = req.query
-
-  const result = chatRooms[request.chatRoom][request.user.replaceAll(' ', '')].messages
+  // const result = chatRooms[request.chatRoom][request.user.replaceAll(' ', '')].messages
+  const result = chatRooms[request.chatRoom]
 
   res.send({ result })
 })
