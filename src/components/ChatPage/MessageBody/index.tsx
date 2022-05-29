@@ -18,7 +18,7 @@ const MessageBody = (props: {
       display={'flex'}
       sx={{ overflowX: 'hidden' }}
       flexDirection={'column'}
-      height={500}
+      // height={500}
       alignItems={'flex-end'}
       p={2}
     >
@@ -26,7 +26,7 @@ const MessageBody = (props: {
 
       {props.messages[props.email] &&
         props.messages[props.users].messages.map((message: any, index: any) => (
-          <DialogItem key={index} message={message} />
+          <DialogItem key={index} message={message} email={props.email} user={props.users} />
         ))}
 
 
