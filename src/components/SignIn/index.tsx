@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Box,
   Button,
@@ -14,6 +14,7 @@ import Footer from './Footer'
 import { useRegistration } from '../../hooks/useRegistration'
 import { useNavigate } from 'react-router-dom'
 import ProgressBar from '../ProgressBar'
+import { io } from 'socket.io-client'
 
 const SignIn = () => {
   const {
@@ -29,6 +30,21 @@ const SignIn = () => {
   if (fetchingStatus?.status === 'OK') {
     navigate('/login', { state: { chatRoom, email } })
   }
+
+  const socket = io('http://localhost:8080/')
+
+  console.log('socket', socket)
+
+  useEffect(() => {
+    console.log('tut')
+    // receive a message from the Server
+    socket.on('hello', (args) => {
+      console.log('args', args)
+    })
+
+    // send a message to the Server
+    socket.emit('howdy', 'stranger')
+  }, [])
 
   return (
     <>

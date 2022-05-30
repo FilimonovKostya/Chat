@@ -1,9 +1,16 @@
 const express = require('express')
 const cors = require('cors')
+// For read requests from client
 const bodyParser = require('body-parser')
+const { createServer } = require("http");
+const { Server } = require('socket.io')
 
 const app = express()
-const port = 3001
+const httpServer = createServer(app);
+const io = new Server(httpServer, {cors: {
+    origin: "http://localhost:3000"
+  }});
+// const port = 8080
 
 // Turn off all CORS problems with Request on server
 app.use(cors())
@@ -92,6 +99,20 @@ app.get('/messages', (req, res) => {
   res.send({ result })
 })
 
-app.listen(port, () => {
-  console.log(`🚀   Server is working on ${port} port`)
-})
+io.on("connection", (socket) => {
+  console.log(`🚀 Socket is working on  port`)
+
+  // send Message on Client
+  socket.emit('hello','world')
+
+  // receive a Message from the Client
+  socket.on('howdy',(args => {
+    console.log('args ----> ', args)
+  }))
+
+});
+
+
+httpServer.listen(8080,() =>{
+  console.log('listening on *:8080');
+});
