@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DialogItem from './DialogItem'
 import Circular from '../../Circular'
 import { ResponseMessages } from '../../../hooks/useMessage'
+import { io } from 'socket.io-client'
+import { URL } from '../../../constants'
+
+// const socket = io(URL)
 
 const MessageBody = (props: {
   messages: ResponseMessages
@@ -9,6 +13,9 @@ const MessageBody = (props: {
   email: string
   user: string
 }) => {
+
+
+
   return (
     <>
       {props.isFetching && <Circular />}

@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import { URL } from '../constants'
+import { io } from 'socket.io-client'
 
 type Messages = {
   name: string
@@ -12,37 +13,40 @@ export type ResponseMessages = {
   [key: string]: Messages
 }
 
+const socket = io()
+
 export const useMessage = (user: string, chatRoom: string) => {
   const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState<ResponseMessages >({})
+  const [messages, setMessages] = useState<ResponseMessages>({})
   const [isFetching, setIsFetching] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
   const onMessageHandler = (e: ChangeEvent<HTMLInputElement>) => setMessage(e.currentTarget.value)
 
-  const onSendMessage = async (event: ChangeEvent<HTMLDivElement>) => {
+  const onSendMessage =  (event: ChangeEvent<HTMLDivElement>) => {
     event.preventDefault()
     setMessage('')
 
-    try {
-      const response = await axios.post<{ result: ResponseMessages; lastMessage: string }>(
-        `${URL}/messages`,
-        {
-          message,
-          user,
-          chatRoom,
-        }
-      )
+    socket.emit('hello','world')
 
-      setMessages((prevState) => {
-        return {
-          ...prevState,
-          [user]: {
-            ...prevState[user],
-            messages: [...prevState[user].messages, response.data.lastMessage],
-          },
-        }
-      })
+    try {
+      // const response = await axios.post<{ result: ResponseMessages; lastMessage: string }>(
+      //   `${URL}/messages`,
+      //   {
+      //     message,
+      //     user,
+      //     chatRoom,
+      //   }
+      // )
+      // setMessages((prevState) => {
+      //   return {
+      //     ...prevState,
+      //     [user]: {
+      //       ...prevState[user],
+      //       messages: [...prevState[user].messages, response.data.lastMessage],
+      //     },
+      //   }
+      // })
     } catch (e) {
       setErrorMessage(JSON.stringify(e))
     }

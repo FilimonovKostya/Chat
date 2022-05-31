@@ -2,15 +2,17 @@ const express = require('express')
 const cors = require('cors')
 // For read requests from client
 const bodyParser = require('body-parser')
-const { createServer } = require("http");
+const { createServer } = require('http')
 const { Server } = require('socket.io')
 
 const app = express()
-const httpServer = createServer(app);
-const io = new Server(httpServer, {cors: {
-    origin: "http://localhost:3000"
-  }});
-// const port = 8080
+const httpServer = createServer(app)
+const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://localhost:3000',
+  },
+})
+const PORT = 8080
 
 // Turn off all CORS problems with Request on server
 app.use(cors())
@@ -89,30 +91,25 @@ app.post('/messages', (req, res) => {
 
   res.send({ result, lastMessage })
 })
+io.on('connection', (socket) => {
+  console.log(`🚀 Socket is working on ${PORT} port`)
+
+  socket.emit('my-event-a', 'world')
+
+  // socket.on('hello', (arg) => {
+  //   console.log('SOCKET ON -->', arg)
+  // })
+
+})
 
 // Url from getting messages on client
 app.get('/messages', (req, res) => {
   const request = req.query
-  // const result = chatRooms[request.chatRoom][request.user.replaceAll(' ', '')].messages
   const result = chatRooms[request.chatRoom]
 
   res.send({ result })
 })
 
-io.on("connection", (socket) => {
-  console.log(`🚀 Socket is working on  port`)
-
-  // send Message on Client
-  socket.emit('hello','world')
-
-  // receive a Message from the Client
-  socket.on('howdy',(args => {
-    console.log('args ----> ', args)
-  }))
-
-});
-
-
-httpServer.listen(8080,() =>{
-  console.log('listening on *:8080');
-});
+httpServer.listen(PORT, () => {
+  console.log(`listening on *:${PORT}`)
+})

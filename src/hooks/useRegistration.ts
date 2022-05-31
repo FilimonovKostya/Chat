@@ -27,7 +27,7 @@ export const useRegistration = (urlParam: string, chatRoom?: string) => {
     setIsFetching(true)
 
     try {
-      const response = await axios.post<ResponseSignInType>(`dada/${urlParam}`, {
+      const response = await axios.post<ResponseSignInType>(`${URL}/${urlParam}`, {
         email: inputData.email.replaceAll(' ', ''),
         password: inputData.password.trim(),
         chatRoom: inputData.chatRoom || chatRoom,

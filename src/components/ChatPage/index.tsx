@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from './Header'
 import MessageBody from './MessageBody'
 import { Alert, Box, Container, Paper } from '@mui/material'
 import MessageControls from './MessageControls'
 import { useMessage } from '../../hooks/useMessage'
 import { useLocation } from 'react-router-dom'
+import { io } from 'socket.io-client'
+import {URL} from './../../constants'
 
 type UrlDataType = {
   email: string
   chatRoom: string
 }
+const socket = io(URL)
 
 const ChatPage = () => {
   const { state } = useLocation()
@@ -18,6 +21,22 @@ const ChatPage = () => {
   const { message, onMessageHandler, onSendMessage, messages, isFetching, errorMessage } =
     useMessage(email, chatRoom)
   const users = Object.keys(messages)
+
+  console.log('tut')
+
+  useEffect(() => {
+    console.log('useEffфвфвфвect')
+
+    socket.on("connect", () => {
+      console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+    });
+
+    socket.on('my-event-a',(arg) => {
+      console.log('client', arg)
+    })
+
+  },[])
+
 
   return (
     <>
